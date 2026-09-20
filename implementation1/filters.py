@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def lpf(Wc, M):
 
     h = np.zeros(2 * M + 1)

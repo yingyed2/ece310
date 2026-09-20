@@ -12,13 +12,13 @@ def equalizer(x, gainLow, gainMid, gainHigh, M):
 
     WlMid = 2 * np.pi * 300 / fs
     WhMid = 2 * np.pi * 3000 / fs
-    W0Mid = (WhMid + WlMid) / 2
+    W0Mid = (WhMid + WlMid) / 2 # mid band center frequency
     WcMid = (WhMid - WlMid) / 2
     hMid = bpf(WcMid, W0Mid, M)
 
     WlHigh = 2 * np.pi * 3000 / fs
     WhHigh = 2 * np.pi * 20000 / fs
-    W0High = (WhHigh + WlHigh) / 2
+    W0High = (WhHigh + WlHigh) / 2  # high band center frequency
     WcHigh = (WhHigh - WlHigh) / 2
     hHigh = bpf(WcHigh, W0High, M)
 
