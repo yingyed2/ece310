@@ -1,5 +1,5 @@
 import numpy as np
-from filters import lpf
+from filters import lpf, bpf
 from rate_conversion import rateConverter
 from utilities import plot_dtft
 
