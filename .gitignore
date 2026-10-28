@@ -1,0 +1,15 @@
+# Python temporary files
+__pycache__/
+*.pyc
+
+# Virtual environments
+.venv/
+venv/
+
+# Implementation 1 audio files
+implementation1/funk.mp3
+implementation1/output.wav
+
+# Implementation 2 input data and generated audio
+implementation2/data/
+implementation2/*.wav
