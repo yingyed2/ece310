@@ -34,3 +34,5 @@ def conjugate_delay(x_limited, dx, delay):
     y = np.imag(product)
 
     return y
+
+"""tested with calculations"""
