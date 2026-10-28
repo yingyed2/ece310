@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 from scipy.io import loadmat
 from scipy.signal import freqz
-from demodulation import limiter, differentiator
+from demodulation import limiter, differentiator, conjugate_delay
 
 
 fs = 256000
@@ -19,6 +19,14 @@ for i, filename in enumerate(files):
 
     x_limited = limiter(x)
     dx, delay, h = differentiator(x_limited, fs)
+
+    y = conjugate_delay(x_limited, dx, delay)
+
+    print(filename.name)
+    print("Output samples:", len(y))
+    print("Output type:", y.dtype)
+    print("First five steady-state samples:", y[100:105])
+    print()
 
     if i == 0:
 
@@ -43,5 +51,16 @@ for i, filename in enumerate(files):
         plt.title("Differentiator Phase (Delay Removed)")
         plt.xlim(0, 100)
         plt.grid()
+
+    test_frequency = 1000
+
+    t = np.arange(5000) / fs
+    test_x = np.exp(1j * 2 * np.pi * test_frequency * t)
+
+    test_dx, test_delay, _ = differentiator(test_x, fs)
+    test_y = conjugate_delay(test_x, test_dx, test_delay)
+
+    print("Expected:", 2 * np.pi * test_frequency)
+    print("Measured:", np.mean(test_y[100:]))
 
 plt.show()

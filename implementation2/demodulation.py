@@ -13,7 +13,6 @@ def differentiator(x, fs):
     cutoff = 100000  # passband edge (Hz)
 
     h = remez(num_taps, [0, cutoff], [1], type="differentiator", fs=fs) # remez(# of fir coefficients, frequency band applied, desired gain, ..., fs)
-
     h = h * 2 * np.pi * fs  # scaled to the ct differentiator
 
     dx = lfilter(h, 1, x)   # apply filter (no feedback)
@@ -22,6 +21,16 @@ def differentiator(x, fs):
 
     return dx, delay, h
 
-"""
+"""tested with dtft plot"""
 
-"""
+
+def conjugate_delay(x_limited, dx, delay):
+
+    x_delayed = np.zeros_like(x_limited)
+    x_delayed[delay:] = x_limited[:-delay]  # delays samples by 'delay' amount
+
+    product = dx * np.conj(x_delayed)   # multiply the derivative with the conjugate of the delayed signal
+
+    y = np.imag(product)
+
+    return y
